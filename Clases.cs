@@ -12,17 +12,20 @@ namespace EspacioClases
         private string nombre;
         private string direccion;
         private string telefono;
+        private string indicacionesDireccion;
 
-        public Cliente(string nombre, string direccion, string telefono)
+        public Cliente(string nombre, string direccion, string telefono, string indicacionesDireccion)
         {
             Nombre = nombre;
             Direccion = direccion;
             Telefono = telefono;
+            IndicacionesDireccion = indicacionesDireccion;
         }
 
         public string Nombre { get => nombre; set => nombre = value; }
         public string Direccion { get => direccion; set => direccion = value; }
         public string Telefono { get => telefono; set => telefono = value; }
+        public string IndicacionesDireccion { get => indicacionesDireccion; set => indicacionesDireccion = value; }
     }
 
     public class Pedidos
@@ -32,11 +35,11 @@ namespace EspacioClases
         private Cliente cliente;
         private string estado;
 
-        public Pedidos(string numPedido, string observacion, Cliente cliente, string estado)
+        public Pedidos(string numPedido, string observacion, string estado, string cliNombre, string cliDireccion, string cliTelefono, string cliIndicacionesDireccion)
         {
             NumPedido = numPedido;
             Observacion = observacion;
-            Cliente = cliente;
+            Cliente = new Cliente(cliNombre, cliDireccion, cliTelefono, cliIndicacionesDireccion);
             Estado = estado;
         }
 
@@ -44,6 +47,8 @@ namespace EspacioClases
         public string Observacion { get => observacion; set => observacion = value; }
         public Cliente Cliente { get => cliente; set => cliente = value; }
         public string Estado { get => estado; set => estado = value; }
+
+        
     }
 
     public class Cadete
@@ -76,11 +81,11 @@ namespace EspacioClases
         private string telefono;
         private List<Cadete> listaCadetes;
 
-        public Cadeteria(string nombre, string telefono, List<Cadete> listaCadetes)
+        public Cadeteria(string nombre, string telefono)
         {
             Nombre = nombre;
             Telefono = telefono;
-            ListaCadetes = listaCadetes;
+            ListaCadetes = new List<Cadete>();
         }
 
         public string Nombre { get => nombre; set => nombre = value; }
