@@ -14,5 +14,10 @@ namespace EspacioClases
             this.telefono = telefono;
             this.indicacionesDireccion = indicacionesDireccion;
         }
+
+        public string VerDatos
+        {
+            get { return $"{nombre} | {direccion} | {telefono} | {indicacionesDireccion}"; }
+        }
     }
 }

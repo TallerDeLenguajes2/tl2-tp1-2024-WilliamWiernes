@@ -21,5 +21,10 @@ namespace EspacioClases
             cliente = new Cliente(cliNombre, cliDireccion, cliTelefono, cliIndicacionesDireccion);
             this.estado = estado;
         }
+
+        public EstadoPedido VerEstado
+        {
+            get { return estado; }
+        }
     }
 }

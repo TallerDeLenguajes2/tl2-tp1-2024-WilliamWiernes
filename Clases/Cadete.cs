@@ -8,6 +8,7 @@ namespace EspacioClases
         private string telefono;
         private List<Pedidos> listaPedidos;
 
+
         public Cadete(int id, string nombre, string direccion, string telefono)
         {
             this.id = id;
@@ -15,6 +16,29 @@ namespace EspacioClases
             this.direccion = direccion;
             this.telefono = telefono;
             listaPedidos = new List<Pedidos>();
+        }
+
+        public string VerDatos
+        {
+            get { return $"{id} | {nombre} | {direccion} | {telefono}"; }
+        }
+
+        public int JornalACobrar()
+        {
+            return 500 * CantidadPedidosEntregados();
+        }
+
+        private int CantidadPedidosEntregados()
+        {
+            int cantidad = 0;
+
+            foreach (var pedido in listaPedidos)
+            {
+                if (pedido.VerEstado == EstadoPedido.Entregado)
+                    cantidad++;
+            }
+
+            return cantidad;
         }
     }
 }
