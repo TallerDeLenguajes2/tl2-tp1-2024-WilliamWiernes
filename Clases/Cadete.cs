@@ -32,7 +32,7 @@ namespace EspacioClases
             return 500 * CantidadPedidosEntregados();
         }
 
-        private int CantidadPedidosEntregados()
+        public int CantidadPedidosEntregados()
         {
             int cantidad = 0;
 

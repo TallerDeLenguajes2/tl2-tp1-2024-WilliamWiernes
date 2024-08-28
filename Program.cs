@@ -44,3 +44,5 @@ while (seleccion != 5)
             break;
     }
 }
+
+cadeteria.GenerarInforme();

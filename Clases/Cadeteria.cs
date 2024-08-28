@@ -198,5 +198,27 @@ namespace EspacioClases
 
             Console.WriteLine($"El Pedido N° {numPedido} fue Reasignado correctamente.");
         }
+
+        public void GenerarInforme()
+        {
+            Console.WriteLine("Informe de la Jornada:");
+
+            foreach (var cadete in listaCadetes)
+            {
+                var monto = cadete.JornalACobrar();
+                var enviosProm = (cadete.VerLista.Count == 0) ? 0 : (double)cadete.CantidadPedidosEntregados() / cadete.VerLista.Count;
+
+                Console.WriteLine($"\n{cadete.VerDatos}");
+                Console.WriteLine($"\tCantidad de envíos: {cadete.VerLista.Count}");
+                Console.WriteLine($"\tMonto ganado: ${monto:F2}");
+                Console.WriteLine($"\tEnvíos promedio: {enviosProm:F2}");
+            }
+
+            var totalEnvios = listaCadetes.Sum(cadete => cadete.VerLista.Count);
+            var montoTotal = listaCadetes.Sum(cadete => cadete.JornalACobrar());
+
+            Console.WriteLine($"\nTotal de envíos: {totalEnvios}");
+            Console.WriteLine($"Monto total: ${montoTotal}");
+        }
     }
 }
