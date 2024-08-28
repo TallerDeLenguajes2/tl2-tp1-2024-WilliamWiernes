@@ -6,8 +6,7 @@ namespace EspacioClases
         private string nombre;
         private string direccion;
         private string telefono;
-        private List<Pedidos> listaPedidos;
-
+        private List<Pedido> listaPedidos;
 
         public Cadete(int id, string nombre, string direccion, string telefono)
         {
@@ -15,12 +14,17 @@ namespace EspacioClases
             this.nombre = nombre;
             this.direccion = direccion;
             this.telefono = telefono;
-            listaPedidos = new List<Pedidos>();
+            listaPedidos = new List<Pedido>();
         }
 
         public string VerDatos
         {
             get { return $"{id} | {nombre} | {direccion} | {telefono}"; }
+        }
+
+        public List<Pedido> VerLista
+        {
+            get { return listaPedidos; }
         }
 
         public int JornalACobrar()

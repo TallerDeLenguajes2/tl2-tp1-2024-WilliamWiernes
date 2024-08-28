@@ -1,12 +1,10 @@
-﻿using System.Security.Cryptography;
-using EspacioClases;
+﻿using EspacioClases;
 
 var cadeteria = new Cadeteria();
 
 var archivoCadeteria = @"CSV\DatosCadeteria.csv";
 var archivoCadetes = @"CSV\DatosCadetes.csv";
 
-// Carga y muestra de datos
 cadeteria.CargarDatosCadeteriaCSV(archivoCadeteria);
 cadeteria.CargarDatosCadetesCSV(archivoCadetes);
 
@@ -16,23 +14,33 @@ foreach (var cadete in cadeteria.VerLista)
     Console.WriteLine(cadete.VerDatos);
 }
 
-// Interfaz de consola
-Console.WriteLine("\n\nMenú: \n1. Alta pedido \n2. Asignar pedido \n3. Cambiar estado \n4. Reasignar pedido");
-int seleccion;
-do
-{
-    Console.Write("Seleccion: ");
-    _ = int.TryParse(Console.ReadLine(), out seleccion);
-} while (seleccion < 1 || seleccion > 4);
+int seleccion = 0;
 
-switch (seleccion)
+while (seleccion != 5)
 {
-    case 1:
-        break;
-    case 2:
-        break;
-    case 3:
-        break;
-    case 4:
-        break;
+    Console.WriteLine("\n\nMenú: \n1. Alta pedido \n2. Asignar pedido \n3. Cambiar estado \n4. Reasignar pedido \n5. Salir");
+    do
+    {
+        Console.Write("Seleccion: ");
+        _ = int.TryParse(Console.ReadLine(), out seleccion);
+    } while (seleccion < 1 || seleccion > 5);
+
+    switch (seleccion)
+    {
+        case 1:
+            cadeteria.AltaPedido();
+            break;
+        case 2:
+            cadeteria.AsignarPedido();
+            break;
+        case 3:
+            cadeteria.CambiarEstado();
+            break;
+        case 4:
+            cadeteria.ReasignarPedido();
+            break;
+        case 5:
+            Console.WriteLine("\nSaliendo...");
+            break;
+    }
 }

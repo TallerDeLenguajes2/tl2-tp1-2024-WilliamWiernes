@@ -7,14 +7,14 @@ namespace EspacioClases
         Cancelado
     }
 
-    public class Pedidos
+    public class Pedido
     {
-        private string numPedido;
+        private int numPedido;
         private string observacion;
         private Cliente cliente;
         private EstadoPedido estado;
 
-        public Pedidos(string numPedido, string observacion, EstadoPedido estado, string cliNombre, string cliDireccion, string cliTelefono, string cliIndicacionesDireccion)
+        public Pedido(int numPedido, string observacion, EstadoPedido estado, string cliNombre, string cliDireccion, string cliTelefono, string cliIndicacionesDireccion)
         {
             this.numPedido = numPedido;
             this.observacion = observacion;
@@ -25,6 +25,12 @@ namespace EspacioClases
         public EstadoPedido VerEstado
         {
             get { return estado; }
+            set { estado = value; }
+        }
+
+        public int VerNumPedido
+        {
+            get { return numPedido; }
         }
     }
 }
