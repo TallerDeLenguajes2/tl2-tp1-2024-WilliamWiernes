@@ -9,7 +9,7 @@ cadeteria.CargarDatosCadeteriaCSV(archivoCadeteria);
 cadeteria.CargarDatosCadetesCSV(archivoCadetes);
 
 Console.WriteLine(cadeteria.VerDatos);
-foreach (var cadete in cadeteria.VerLista)
+foreach (var cadete in cadeteria.VerListaCadetes)
 {
     Console.WriteLine(cadete.VerDatos);
 }
@@ -18,7 +18,7 @@ int seleccion = 0;
 
 while (seleccion != 5)
 {
-    Console.WriteLine("\n\nMenú: \n1. Alta pedido \n2. Asignar pedido \n3. Cambiar estado \n4. Reasignar pedido \n5. Salir");
+    Console.WriteLine("\n\nMenú: \n1. Alta pedido \n2. Asignar cadete \n3. Cambiar estado \n4. Reasignar cadete \n5. Salir");
     do
     {
         Console.Write("Seleccion: ");
@@ -37,7 +37,7 @@ while (seleccion != 5)
             cadeteria.CambiarEstado();
             break;
         case 4:
-            cadeteria.ReasignarPedido();
+            cadeteria.ReasignarCadete();
             break;
         case 5:
             Console.WriteLine("\nSaliendo...");

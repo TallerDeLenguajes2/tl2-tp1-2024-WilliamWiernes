@@ -13,6 +13,7 @@ namespace EspacioClases
         private string observacion;
         private Cliente cliente;
         private EstadoPedido estado;
+        private Cadete cadete;
 
         public Pedido(int numPedido, string observacion, EstadoPedido estado, string cliNombre, string cliDireccion, string cliTelefono, string cliIndicacionesDireccion)
         {
@@ -31,6 +32,12 @@ namespace EspacioClases
         public int VerNumPedido
         {
             get { return numPedido; }
+        }
+
+        public Cadete VerCadete
+        {
+            get { return cadete; }
+            set { cadete = value; }
         }
     }
 }
