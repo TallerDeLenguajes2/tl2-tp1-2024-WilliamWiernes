@@ -1,0 +1,32 @@
+[
+    {
+        "VerId": 0,
+        "VerNombre": "Juan Peréz",
+        "VerDireccion": "Calle Falsa 123",
+        "VerTelefono": "555-1234"
+    },
+    {
+        "VerId": 1,
+        "VerNombre": "Maria Gomez",
+        "VerDireccion": "Avenida Siempreviva 456",
+        "VerTelefono": "555-5678"
+    },
+    {
+        "VerId": 2,
+        "VerNombre": "Carlos Díaz",
+        "VerDireccion": "Calle Luna 789",
+        "VerTelefono": "555-9012"
+    },
+    {
+        "VerId": 3,
+        "VerNombre": "Sofia Torres",
+        "VerDireccion": "Pasaje Estrella 101",
+        "VerTelefono": "555-3456"
+    },
+    {
+        "VerId": 4,
+        "VerNombre": "Pedro Martínez",
+        "VerDireccion": "Bulevar Sol 202",
+        "VerTelefono": "555-7890"
+    }
+]

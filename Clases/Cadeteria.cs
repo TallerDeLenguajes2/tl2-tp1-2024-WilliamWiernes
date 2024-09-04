@@ -18,6 +18,7 @@ namespace EspacioClases
         public List<Cadete> VerListaCadetes
         {
             get { return listaCadetes; }
+            set { listaCadetes = value; }
         }
 
         public string VerDatos
@@ -25,22 +26,16 @@ namespace EspacioClases
             get { return $"{nombre} | {telefono}"; }
         }
 
-        public void CargarDatosCadeteriaCSV(string nombreArchivo)
+        public string VerNombre
         {
-            var arregloCadeteria = File.ReadAllText(nombreArchivo).Split(",");
-            nombre = arregloCadeteria[0];
-            telefono = arregloCadeteria[1];
+            get { return nombre; }
+            set { nombre = value; }
         }
 
-        public void CargarDatosCadetesCSV(string nombreArchivo)
+        public string VerTelefono
         {
-            var arregloLineas = File.ReadAllLines(nombreArchivo);
-            foreach (var linea in arregloLineas)
-            {
-                var arregloCadete = linea.Split(",");
-                var cadete = new Cadete(int.Parse(arregloCadete[0]), arregloCadete[1], arregloCadete[2], arregloCadete[3]);
-                listaCadetes.Add(cadete);
-            }
+            get { return telefono; }
+            set { telefono = value; }
         }
 
         public void AltaPedido()

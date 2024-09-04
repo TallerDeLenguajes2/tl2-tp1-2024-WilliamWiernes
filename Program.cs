@@ -1,12 +1,31 @@
 ﻿using EspacioClases;
+using EspacioDatos;
 
 var cadeteria = new Cadeteria();
 
-var archivoCadeteria = @"CSV\DatosCadeteria.csv";
-var archivoCadetes = @"CSV\DatosCadetes.csv";
+var archivoCadeteria = @"Datos\DatosCadeteria";
+var archivoCadetes = @"Datos\DatosCadetes";
 
-cadeteria.CargarDatosCadeteriaCSV(archivoCadeteria);
-cadeteria.CargarDatosCadetesCSV(archivoCadetes);
+int seleccionDatos;
+Console.WriteLine("Carga de Datos: \n1. Archivos CSV \n2. Archivos JSON");
+do
+{
+    Console.Write("Seleccion: ");
+    _ = int.TryParse(Console.ReadLine(), out seleccionDatos);
+} while (seleccionDatos < 1 || seleccionDatos > 2);
+
+if (seleccionDatos == 1)
+{
+    var lectorCSV = new AccesoCSV();
+    lectorCSV.CargarDatosCadeteria(archivoCadeteria + ".csv", ref cadeteria);
+    lectorCSV.CargarDatosCadetes(archivoCadetes + ".csv", ref cadeteria);
+}
+else
+{
+    var lectorJSON = new AccesoJSON();
+    lectorJSON.CargarDatosCadeteria(archivoCadeteria + ".json", ref cadeteria);
+    lectorJSON.CargarDatosCadetes(archivoCadetes + ".json", ref cadeteria);
+}
 
 Console.WriteLine(cadeteria.VerDatos);
 foreach (var cadete in cadeteria.VerListaCadetes)
