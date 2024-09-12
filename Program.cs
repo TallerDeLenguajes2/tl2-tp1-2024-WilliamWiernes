@@ -1,5 +1,6 @@
 ﻿using EspacioClases;
 using EspacioDatos;
+using EspacioMenu;
 
 var cadeteria = new Cadeteria();
 
@@ -17,14 +18,14 @@ do
 if (seleccionDatos == 1)
 {
     var lectorCSV = new AccesoCSV();
-    lectorCSV.CargarDatosCadeteria(archivoCadeteria + ".csv", ref cadeteria);
-    lectorCSV.CargarDatosCadetes(archivoCadetes + ".csv", ref cadeteria);
+    lectorCSV.CargarDatosCadeteria(archivoCadeteria + ".csv", cadeteria);
+    lectorCSV.CargarDatosCadetes(archivoCadetes + ".csv", cadeteria);
 }
 else
 {
     var lectorJSON = new AccesoJSON();
-    lectorJSON.CargarDatosCadeteria(archivoCadeteria + ".json", ref cadeteria);
-    lectorJSON.CargarDatosCadetes(archivoCadetes + ".json", ref cadeteria);
+    lectorJSON.CargarDatosCadeteria(archivoCadeteria + ".json", cadeteria);
+    lectorJSON.CargarDatosCadetes(archivoCadetes + ".json", cadeteria);
 }
 
 Console.WriteLine(cadeteria.VerDatos);
@@ -47,16 +48,16 @@ while (seleccion != 5)
     switch (seleccion)
     {
         case 1:
-            cadeteria.AltaPedido();
+            Menu.Opcion1(cadeteria);
             break;
         case 2:
-            cadeteria.AsignarPedido();
+            Menu.Opcion2(cadeteria);
             break;
         case 3:
-            cadeteria.CambiarEstado();
+            Menu.Opcion3(cadeteria);
             break;
         case 4:
-            cadeteria.ReasignarCadete();
+            Menu.Opcion4(cadeteria);
             break;
         case 5:
             Console.WriteLine("\nSaliendo...");
@@ -64,4 +65,4 @@ while (seleccion != 5)
     }
 }
 
-cadeteria.GenerarInforme();
+Menu.InformeJornada(cadeteria);

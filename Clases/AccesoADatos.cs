@@ -5,20 +5,20 @@ namespace EspacioDatos
 {
     public abstract class AccesoADatos
     {
-        public abstract void CargarDatosCadeteria(string nombreArchivo, ref Cadeteria cadeteria);
-        public abstract void CargarDatosCadetes(string nombreArchivo, ref Cadeteria cadeteria);
+        public abstract void CargarDatosCadeteria(string nombreArchivo, Cadeteria cadeteria);
+        public abstract void CargarDatosCadetes(string nombreArchivo, Cadeteria cadeteria);
     }
 
     public class AccesoCSV : AccesoADatos
     {
-        public override void CargarDatosCadeteria(string nombreArchivo, ref Cadeteria cadeteria)
+        public override void CargarDatosCadeteria(string nombreArchivo, Cadeteria cadeteria)
         {
             var arregloCadeteria = File.ReadAllText(nombreArchivo).Split(",");
             cadeteria.VerNombre = arregloCadeteria[0];
             cadeteria.VerTelefono = arregloCadeteria[1];
         }
 
-        public override void CargarDatosCadetes(string nombreArchivo, ref Cadeteria cadeteria)
+        public override void CargarDatosCadetes(string nombreArchivo, Cadeteria cadeteria)
         {
             var arregloLineas = File.ReadAllLines(nombreArchivo);
             foreach (var linea in arregloLineas)
@@ -32,7 +32,7 @@ namespace EspacioDatos
 
     public class AccesoJSON : AccesoADatos
     {
-        public override void CargarDatosCadeteria(string nombreArchivo, ref Cadeteria cadeteria)
+        public override void CargarDatosCadeteria(string nombreArchivo, Cadeteria cadeteria)
         {
             using (var archivo = new FileStream(nombreArchivo, FileMode.Open))
             {
@@ -49,7 +49,7 @@ namespace EspacioDatos
             }
         }
 
-        public override void CargarDatosCadetes(string nombreArchivo, ref Cadeteria cadeteria)
+        public override void CargarDatosCadetes(string nombreArchivo, Cadeteria cadeteria)
         {
             using (var archivo = new FileStream(nombreArchivo, FileMode.Open))
             {

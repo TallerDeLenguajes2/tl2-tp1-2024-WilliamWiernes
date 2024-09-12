@@ -1,3 +1,5 @@
+using System.ComponentModel;
+
 namespace EspacioClases
 {
     public class Cadeteria
@@ -38,196 +40,57 @@ namespace EspacioClases
             set { telefono = value; }
         }
 
-        public void AltaPedido()
+        public int VerContNumPedido
         {
-            var numPedido = contNumPedido;
-            contNumPedido++;
+            get { return contNumPedido; }
+        }
 
-            Console.WriteLine($"\nPedido N° {numPedido}:");
-            Console.Write("\tIngrese una observación: ");
-            var observacion = Console.ReadLine();
+        public List<Pedido> VerListaPedidos
+        {
+            get { return listaPedidos; }
+        }
 
-            Console.WriteLine("Ingrese los datos del Cliente:");
-            Console.Write("\tNombre: ");
-            var cliNombre = Console.ReadLine();
-
-            Console.Write("\tDirección: ");
-            var cliDireccion = Console.ReadLine();
-
-            Console.Write("\tTeléfono: ");
-            var cliTelefono = Console.ReadLine();
-
-            Console.Write("\tIndicaciones dirección: ");
-            var cliIndicacionesDireccion = Console.ReadLine();
-
-            var pedidoAux = new Pedido(numPedido, observacion, EstadoPedido.Espera, cliNombre, cliDireccion, cliTelefono, cliIndicacionesDireccion);
-
+        public void AltaPedido(string observacion, string cliNombre, string cliDireccion, string cliTelefono, string cliIndicacionesDireccion)
+        {
+            var pedidoAux = new Pedido(contNumPedido, observacion, EstadoPedido.Espera, cliNombre, cliDireccion, cliTelefono, cliIndicacionesDireccion);
             listaPedidos.Add(pedidoAux);
-
-            Console.WriteLine($"El Pedido N° {numPedido} se ha añadido a la lista Correctamente.");
+            contNumPedido++;
         }
 
-        public void AsignarPedido()
-        {
-            Console.WriteLine("Pedidos:");
-            if (listaPedidos.Count != 0)
-            {
-                foreach (var pedido in listaPedidos)
-                {
-                    if (pedido.VerCadete == null)
-                        Console.WriteLine($"\tNúmero: {pedido.VerNumPedido} | Estado: {pedido.VerEstado}");
-                }
-
-                int idCadete;
-                do
-                {
-                    Console.Write("\nIngresa el Id del Cadete a Asignar: ");
-                    _ = int.TryParse(Console.ReadLine(), out idCadete);
-                } while (idCadete < 0 || idCadete > listaCadetes.Count);
-
-                int numPedido;
-                do
-                {
-                    Console.Write("\nIngrese el N° de Pedido que recibe el Cadete: ");
-                    _ = int.TryParse(Console.ReadLine(), out numPedido);
-                } while (numPedido < 0 || numPedido > contNumPedido - 1);
-
-                if (listaPedidos[numPedido].VerCadete == null)
-                {
-                    AsignarCadeteAPedido(idCadete, numPedido);
-                }
-                else
-                {
-                    Console.WriteLine("Este Pedido ya tiene un Cadete! Use la función para Reasignar Cadetes.");
-                }
-            }
-            else
-            {
-                Console.WriteLine("\tNo hay pedidos!");
-            }
-        }
-
-        private void AsignarCadeteAPedido(int idCadete, int numPedido)
+        public void AsignarCadeteAPedido(int idCadete, int numPedido)
         {
             listaPedidos[numPedido].VerCadete = listaCadetes[idCadete];
-
-            var cadete = listaPedidos[numPedido].VerCadete;
-            var pedido = listaPedidos[numPedido];
-
-            Console.WriteLine($"El Cadete Id {cadete.VerId} fue Asignado correctamente al Pedido {pedido.VerNumPedido}.");
         }
 
-        public void CambiarEstado()
+        public void CambiarEstado(int numPedido, int seleccionEstado)
         {
-            Console.WriteLine("Pedidos:");
-            if (listaPedidos.Count != 0)
+            switch (seleccionEstado)
             {
-                foreach (var pedido in listaPedidos)
-                {
-                    Console.WriteLine($"\tNúmero: {pedido.VerNumPedido} | Estado: {pedido.VerEstado} | Id Cadete: {pedido.VerCadete.VerId}");
-                }
-
-                int numPedido;
-                do
-                {
-                    Console.Write("\nIngrese el N° de Pedido a Cambiar el Estado: ");
-                    _ = int.TryParse(Console.ReadLine(), out numPedido);
-                } while (numPedido < 0 || numPedido > contNumPedido - 1);
-
-                int seleccion;
-                Console.WriteLine("1. Entregado \n2. Espera \n3. Cancelado");
-                do
-                {
-                    Console.Write("Seleccion: ");
-                    _ = int.TryParse(Console.ReadLine(), out seleccion);
-                } while (seleccion < 1 || seleccion > 3);
-
-                var pedidoEstado = listaPedidos[numPedido];
-
-                switch (seleccion)
-                {
-                    case 1:
-                        pedidoEstado.VerEstado = EstadoPedido.Entregado;
-                        break;
-                    case 2:
-                        pedidoEstado.VerEstado = EstadoPedido.Espera;
-                        break;
-                    case 3:
-                        pedidoEstado.VerEstado = EstadoPedido.Cancelado;
-                        break;
-                }
-
-                Console.WriteLine($"El estado del Pedido N° {numPedido} ha sido cambiado a {pedidoEstado.VerEstado}.");
-            }
-            else
-            {
-                Console.WriteLine("\tNo hay pedidos!");
+                case 1:
+                    listaPedidos[numPedido].VerEstado = EstadoPedido.Entregado;
+                    break;
+                case 2:
+                    listaPedidos[numPedido].VerEstado = EstadoPedido.Espera;
+                    break;
+                case 3:
+                    listaPedidos[numPedido].VerEstado = EstadoPedido.Cancelado;
+                    break;
             }
         }
 
-        public void ReasignarCadete()
+        public void ReasignarCadete(int idCadete, int numPedido)
         {
-            Console.WriteLine("Pedidos:");
-            if (listaPedidos.Count != 0)
-            {
-                foreach (var pedido in listaPedidos)
-                {
-                    Console.WriteLine($"\tNúmero: {pedido.VerNumPedido} | Estado: {pedido.VerEstado} | Id Cadete: {pedido.VerCadete.VerId}");
-                }
-
-                int idCadete;
-                do
-                {
-                    Console.Write("\nIngresa el Id del Cadete a Reasignar: ");
-                    _ = int.TryParse(Console.ReadLine(), out idCadete);
-                } while (idCadete < 0 || idCadete > listaCadetes.Count);
-
-                int numPedido;
-                do
-                {
-                    Console.Write("\nIngrese el N° de Pedido que recibe el Cadete: ");
-                    _ = int.TryParse(Console.ReadLine(), out numPedido);
-                } while (numPedido < 0 || numPedido > contNumPedido - 1);
-
-                listaPedidos[numPedido].VerCadete = listaCadetes[idCadete];
-
-                Console.WriteLine($"El Cadete Id {listaCadetes[idCadete].VerId} fue Reasignado correctamente al Pedido {listaPedidos[numPedido].VerNumPedido}.");
-            }
-            else
-            {
-                Console.WriteLine("\tNo hay pedidos!");
-            }
+            listaPedidos[numPedido].VerCadete = listaCadetes[idCadete];
         }
 
-        public void GenerarInforme()
+        public string GenerarInforme(int idCadete)
         {
-            Console.WriteLine("Informe de la Jornada:");
+            var monto = JornalACobrar(idCadete);
+            var cantidadPedidos = CantidadDePedidosPorCadete(idCadete);
+            var cantidadPedidosEntregados = CantidadPedidosEntregados(idCadete);
+            var enviosProm = (double)cantidadPedidosEntregados / ((cantidadPedidos == 0) ? 1 : cantidadPedidos); // Para solucionar problema con NaN
 
-            if (listaPedidos.Count != 0)
-            {
-                foreach (var cadete in listaCadetes)
-                {
-                    var monto = JornalACobrar(cadete.VerId);
-                    var cantidadPedidos = (CantidadDePedidosPorCadete(cadete.VerId) == 0) ? 1 : CantidadDePedidosPorCadete(cadete.VerId);
-                    var cantidadPedidosEntregados = CantidadPedidosEntregados(cadete.VerId);
-                    var enviosProm = (double)cantidadPedidosEntregados / cantidadPedidos;
-
-                    Console.WriteLine($"\n{cadete.VerDatos}");
-                    Console.WriteLine($"\tCantidad de envíos: {cantidadPedidos}");
-                    Console.WriteLine($"\tMonto ganado: ${monto:F2}");
-                    Console.WriteLine($"\tEnvíos promedio: {enviosProm:F2}");
-                }
-
-                var totalEnvios = listaPedidos.Count;
-                var montoTotal = listaCadetes.Sum(cadete => JornalACobrar(cadete.VerId));
-
-                Console.WriteLine($"\nTotal de envíos: {totalEnvios}");
-                Console.WriteLine($"Monto total: ${montoTotal}");
-            }
-            else
-            {
-                Console.WriteLine("\tNo hay pedidos!");
-            }
+            return $"\n{listaCadetes[idCadete].VerDatos}\n\tCantidad de envíos: {cantidadPedidos} | Monto ganado: ${monto:F2} | Envíos promedio: {enviosProm:F2}";
         }
 
         public int JornalACobrar(int idCadete)
@@ -255,9 +118,8 @@ namespace EspacioClases
 
             foreach (var pedido in listaPedidos)
             {
-
-                if (pedido.VerCadete.VerId == idCadete)
-                    cantidad++;
+                    if (pedido.VerCadete.VerId == idCadete)
+                        cantidad++;
             }
 
             return cantidad;
